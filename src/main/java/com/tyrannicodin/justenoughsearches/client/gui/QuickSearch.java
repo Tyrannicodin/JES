@@ -23,15 +23,13 @@ public class QuickSearch extends Screen {
     @Override
     public void tick() {
         if (TInput.getValue().startsWith("=")) {
-            Double result;
+            Double Result;
             try {
-                result = new ExpressionBuilder("1+1").build().evaluate();
+                Result = new ExpressionBuilder("1+1").build().evaluate();
             } catch (IllegalArgumentException exception) {
-                result = 0.0;
+                Result = 0.0;
             }
-            Minecraft.getInstance().player.displayClientMessage(new TextComponent(result + ""), true);
-        } else {
-
+            Minecraft.getInstance().player.displayClientMessage(new TextComponent(Result + ""), true);
         }
         super.tick();
     }
