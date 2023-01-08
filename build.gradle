@@ -141,10 +141,10 @@ repositories {
     // Put repositories for dependencies here
     // ForgeGradle automatically adds the Forge maven and Maven Central for you
 
-    // If you have mod jar dependencies in ./libs, you can declare them as a repository like so:
-    // flatDir {
-    //     dir 'libs'
-    // }
+    maven {
+        name = "JEI"
+        url = "https://dvs1.progwml6.com/files/maven/"
+    }
 }
 
 dependencies {
@@ -164,6 +164,14 @@ dependencies {
     // For more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
+
+    // compile against the JEI API but do not include it at runtime
+    compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api")
+    // at runtime, use the full JEI jar
+    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")
+
+    //Maths expressions parser
+    implementation group: 'net.objecthunter', name: 'exp4j', version: '0.4.8'
 }
 
 // Example for how to get properties into the manifest for reading at runtime.
@@ -171,11 +179,11 @@ jar {
     manifest {
         attributes([
                 "Specification-Title"     : "justenoughsearches",
-                "Specification-Vendor"    : "justenoughsearchessareus",
+                "Specification-Vendor"    : "tyrannicodin",
                 "Specification-Version"   : "1", // We are version 1 of ourselves
                 "Implementation-Title"    : project.name,
                 "Implementation-Version"  : project.jar.archiveVersion,
-                "Implementation-Vendor"   : "justenoughsearchessareus",
+                "Implementation-Vendor"   : "tyrannicodin",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
