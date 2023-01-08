@@ -1,2 +1,2 @@
 # Jes
- Quick search for minecraft, includes maths functions and searching just enough items.
+ Quick search for minecraft, includes maths functions and hopefully searching just enough items soon.
