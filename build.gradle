@@ -16,9 +16,9 @@ apply plugin: 'org.parchmentmc.librarian.forgegradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '0.1.0-1.18.2'
+version = '1.18.2-0.1.1'
 group = 'com.tyrannicodin.justenoughsearches' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = 'justenoughsearches'
+archivesBaseName = 'JustEnoughSearches'
 
 // Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
@@ -164,16 +164,13 @@ dependencies {
     // For more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
-
-    //Maths expressions parser
-    implementation group: 'net.objecthunter', name: 'exp4j', version: '0.4.8'
 }
 
 // Example for how to get properties into the manifest for reading at runtime.
 jar {
     manifest {
         attributes([
-                "Specification-Title"     : "justenoughsearches",
+                "Specification-Title"     : "JustEnoughSearches",
                 "Specification-Vendor"    : "tyrannicodin",
                 "Specification-Version"   : "1", // We are version 1 of ourselves
                 "Implementation-Title"    : project.name,

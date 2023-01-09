@@ -29,12 +29,12 @@ displayName="Just Enough Searches" #mandatory
 # A file name (in the root of the mod JAR) containing a logo for display
 logoFile="jes.png" #optional
 # A text field displayed in the mod UI
-credits="Thanks for this example mod goes to Java" #optional
+credits="exp4j for equation evaluation - https://www.objecthunter.net/exp4j/" #optional
 # A text field displayed in the mod UI
-authors="Tyrannicodin" #optional
+authors="Tyrannicodin16" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description='''
-This mod adds a quick search similar to the one in satisfactory, it allows ypu to do maths and search for items using JEI
+This is a simple mod that allows you to perform calculations in Minecraft, by pressing the grave key (`, usually located next to the 1 key) you can open a simple gui with a textbox where you should enter an = symbol, followed by the equation you want to calculate.
 '''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.justenoughsearches]] #optional
@@ -53,6 +53,6 @@ This mod adds a quick search similar to the one in satisfactory, it allows ypu t
     modId="minecraft"
     mandatory=true
 # This version range declares a minimum of the current minecraft version up to but not including the next major version
-    versionRange="[1.18.2,1.19)"
+    versionRange="[1.18.2,)"
     ordering="NONE"
     side="BOTH"
