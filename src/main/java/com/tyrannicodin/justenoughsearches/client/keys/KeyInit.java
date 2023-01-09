@@ -9,9 +9,11 @@ public final class KeyInit {
     private KeyInit() {}
 
     public static KeyMapping quicksearchKeyMapping;
+    public static KeyMapping quicksearchShortcutKeyMapping;
 
     public static void init() {
         quicksearchKeyMapping = registerKey("open_quicksearch", KeyMapping.CATEGORY_INTERFACE, InputConstants.KEY_GRAVE);
+        quicksearchShortcutKeyMapping = registerKey("quicksearch_equation_shortcut", KeyMapping.CATEGORY_INTERFACE, InputConstants.KEY_EQUALS);
     }
 
     private static KeyMapping registerKey(String name, String category, int keycode) {

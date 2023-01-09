@@ -1,3 +1,5 @@
 {
-  "key.justenoughsearches.open_quicksearch": "Open quick search"
+  "gui.justenoughsearches.quicksearch_title": "Quick search",
+  "key.justenoughsearches.open_quicksearch": "Open quick search",
+  "key.justenoughsearches.quicksearch_equation_shortcut": "Calculation shortcut"
 }

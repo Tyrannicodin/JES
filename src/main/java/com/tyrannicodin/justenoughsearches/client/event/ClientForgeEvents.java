@@ -19,7 +19,7 @@ public class ClientForgeEvents {
     public static void clientTick(TickEvent.ClientTickEvent event) {
         var player = Minecraft.getInstance().player;
         if (KeyInit.quicksearchKeyMapping.consumeClick()) {
-            Minecraft.getInstance().setScreen(new QuickSearch());
+            Minecraft.getInstance().setScreen(new QuickSearch(""));
         }
     }
 }

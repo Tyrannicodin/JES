@@ -1,25 +1,33 @@
 package com.tyrannicodin.justenoughsearches.client.gui;
 
-import com.mojang.logging.LogUtils;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.EditBox;
+import net.minecraft.client.gui.components.MultiLineLabel;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.objecthunter.exp4j.ExpressionBuilder;
 import java.util.EmptyStackException;
 
 public class QuickSearch extends Screen {
     private String prevValue = "";
+    private String prefix = "";
 
     private EditBox TInput;
-    public QuickSearch() {
-        super(new TextComponent("Quick search"));
+
+    public QuickSearch(String pPrefix) {
+        super(new TranslatableComponent("gui.justenoughsearches.quicksearch_title"));
+        prefix = pPrefix;
+
     }
 
     @Override
     protected void init() {
         super.init();
-        TInput = new EditBox(this.font, 10, 10, 150, 16, new TextComponent(""));;
+
+        TInput = new EditBox(this.font, 10, 10, 150, 16, new TextComponent(prefix));
+        TInput.setFocus(true);
         TInput.setVisible(true);
         this.addRenderableWidget(TInput);
     }
@@ -39,6 +47,13 @@ public class QuickSearch extends Screen {
             }
             Minecraft.getInstance().player.displayClientMessage(new TextComponent(Result + ""), true);
         }
+    }
+
+    @Override
+    public void render(PoseStack stack, int mouseX, int mouseY, float pPartialTick) {
+        drawString(stack, this.font, new TranslatableComponent("gui.justenoughsearches.quicksearch_title"), 16, 0, 0xFFFFFF);
+
+        super.render(stack, mouseX, mouseY, pPartialTick);
     }
 
     @Override
