@@ -20,6 +20,8 @@ public class ClientForgeEvents {
         var player = Minecraft.getInstance().player;
         if (KeyInit.quicksearchKeyMapping.consumeClick()) {
             Minecraft.getInstance().setScreen(new QuickSearch(""));
+        } else if (KeyInit.quicksearchShortcutKeyMapping.consumeClick()) {
+            Minecraft.getInstance().setScreen(new QuickSearch("="));
         }
     }
 }
