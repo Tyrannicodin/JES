@@ -2,9 +2,9 @@ package com.tyrannicodin.justenoughsearches.client.gui;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.logging.LogUtils;
+import com.tyrannicodin.justenoughsearches.client.gui.list.ListContainer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.EditBox;
-import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -18,6 +18,7 @@ public class QuickSearch extends Screen {
     private String prefix = "";
 
     private EditBox TInput;
+    private ListContainer ItemContainer;
 
     private static final Logger LOGGER = LogUtils.getLogger();
 
@@ -38,31 +39,21 @@ public class QuickSearch extends Screen {
         TInput.setFocus(true);
         TInput.setEditable(true);
         setFocused(TInput);
+
+        ItemContainer = new ListContainer(10, 26, 150);
     }
 
     @Override
     public void tick() {
         super.tick();
         TInput.tick();
-
-        String tiValue = TInput.getValue();
-        if (tiValue != prevValue && tiValue.startsWith("=")) {
-            prevValue = tiValue;
-            Double Result;
-            try {
-                Result = new ExpressionBuilder(tiValue.replace("=", "")).build().evaluate();
-            } catch (IllegalArgumentException exception) {
-                Result = 0.0;
-            } catch (EmptyStackException exception) {
-                Result = 0.0;
-            }
-            Minecraft.getInstance().player.displayClientMessage(new TextComponent(Result + ""), true);
-        }
     }
 
     @Override
     public void render(PoseStack stack, int mouseX, int mouseY, float pPartialTick) {
         drawString(stack, this.font, new TranslatableComponent("gui.justenoughsearches.quicksearch_title"), 10, 0, 0xFFFFFF);
+
+        ItemContainer.render(stack, mouseX, mouseY, pPartialTick, TInput.getValue());
 
         super.render(stack, mouseX, mouseY, pPartialTick);
     }
