@@ -3,18 +3,13 @@ package com.tyrannicodin.justenoughsearches.client.gui;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.logging.LogUtils;
 import com.tyrannicodin.justenoughsearches.client.gui.list.ListContainer;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
-import net.objecthunter.exp4j.ExpressionBuilder;
 import org.slf4j.Logger;
 
-import java.util.EmptyStackException;
-
 public class QuickSearch extends Screen {
-    private String prevValue = "";
     private String prefix = "";
 
     private EditBox TInput;
@@ -25,7 +20,14 @@ public class QuickSearch extends Screen {
     public QuickSearch(String pPrefix) {
         super(new TranslatableComponent("gui.justenoughsearches.quicksearch_title"));
         prefix = pPrefix;
+    }
 
+    public void onRuntimeAvailable() {
+
+    }
+
+    public void setVisible() {
+        //Testing
     }
 
     @Override
@@ -40,7 +42,7 @@ public class QuickSearch extends Screen {
         TInput.setEditable(true);
         setFocused(TInput);
 
-        ItemContainer = new ListContainer(10, 26, 150);
+        ItemContainer = new ListContainer(10, 26, 150, 16);
     }
 
     @Override

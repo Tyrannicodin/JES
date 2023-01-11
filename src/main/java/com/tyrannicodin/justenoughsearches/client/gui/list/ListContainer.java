@@ -14,13 +14,15 @@ public class ListContainer {
     private int x;
     private int y;
     private int width;
+    private int height;
     private String prevInput = "";
 
-    public ListContainer(int pX, int pY, int pWidth) {
+    public ListContainer(int pX, int pY, int pWidth, int pHeight) {
         x = pX;
         y = pY;
         width = pWidth;
-        Equation = new EquationListElement(x, y+1, width);
+        height = pHeight;
+        Equation = new EquationListElement(x, y+1, width, height);
     }
 
     public void render(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick, String Input) {
@@ -44,7 +46,7 @@ public class ListContainer {
                 renderEquation(pPoseStack, pMouseX, pMouseY, pPartialTick, Result);
                 Minecraft.getInstance().player.displayClientMessage(new TextComponent(Result + ""), true);
             } else {
-                //JEI stuff
+                //JEI stuff goes here
             }
         }
     }

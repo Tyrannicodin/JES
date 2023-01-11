@@ -6,8 +6,8 @@ import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.TextComponent;
 
 public class EquationListElement extends ListElement {
-    public EquationListElement(int pX, int pY, int pWidth) {
-        super(pX, pY, pWidth);
+    public EquationListElement(int pX, int pY, int pWidth, int pHeight) {
+        super(pX, pY, pWidth, pHeight);
     }
 
     @Override
