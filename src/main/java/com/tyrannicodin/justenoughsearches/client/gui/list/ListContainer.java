@@ -2,11 +2,12 @@ package com.tyrannicodin.justenoughsearches.client.gui.list;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.world.item.ItemStack;
 import net.objecthunter.exp4j.ExpressionBuilder;
 
 import java.util.ArrayList;
 import java.util.EmptyStackException;
+import java.util.List;
 
 public class ListContainer {
     private ArrayList<ListElement> ListItems = new ArrayList<>();
@@ -46,7 +47,17 @@ public class ListContainer {
                 renderEquation(pPoseStack, pMouseX, pMouseY, pPartialTick, Result);
                 //Minecraft.getInstance().player.displayClientMessage(new TextComponent(Result + ""), true);
             } else {
-                renderItems(pPoseStack, pMouseX, pMouseY, pPartialTick);
+                if (searchHandler.getInstance() != null) {
+                    List<ItemStack> results = searchHandler.searchItems(Input);
+                    int iY = y;
+                    int maxHeight = Minecraft.getInstance().screen.height;
+                    results.forEach(Item -> {
+                        if (y+height*(ListItems.size()+1) < maxHeight) {
+                            ListItems.add(new ItemListElement(x, y+((height+2)*ListItems.size()), width, height, Item));
+                        }
+                    });
+                    renderItems(pPoseStack, pMouseX, pMouseY, pPartialTick);
+                }
             }
         }
     }
@@ -59,7 +70,7 @@ public class ListContainer {
     private void renderItems(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
         ListItems.forEach(Item -> {
             if (!Item.isEquation()) {
-                //JEI stuff
+                Item.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
             }
         });
     }
