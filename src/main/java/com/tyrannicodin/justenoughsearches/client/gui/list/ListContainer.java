@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.EmptyStackException;
 
 public class ListContainer {
-    private ArrayList<ListElement> ListItems = new ArrayList<ListElement>();
+    private ArrayList<ListElement> ListItems = new ArrayList<>();
     private EquationListElement Equation;
     private int x;
     private int y;
@@ -22,7 +22,7 @@ public class ListContainer {
         y = pY;
         width = pWidth;
         height = pHeight;
-        Equation = new EquationListElement(x, y+1, width, height);
+        Equation = new EquationListElement(x, y, width, height);
     }
 
     public void render(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick, String Input) {
@@ -44,9 +44,9 @@ public class ListContainer {
                 }
                 ListItems.add(Equation);
                 renderEquation(pPoseStack, pMouseX, pMouseY, pPartialTick, Result);
-                Minecraft.getInstance().player.displayClientMessage(new TextComponent(Result + ""), true);
+                //Minecraft.getInstance().player.displayClientMessage(new TextComponent(Result + ""), true);
             } else {
-                //JEI stuff goes here
+                renderItems(pPoseStack, pMouseX, pMouseY, pPartialTick);
             }
         }
     }

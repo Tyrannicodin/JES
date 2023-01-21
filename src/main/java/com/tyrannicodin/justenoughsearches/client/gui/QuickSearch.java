@@ -42,7 +42,7 @@ public class QuickSearch extends Screen {
         TInput.setEditable(true);
         setFocused(TInput);
 
-        ItemContainer = new ListContainer(10, 26, 150, 16);
+        ItemContainer = new ListContainer(10, 28, 150, 19);
     }
 
     @Override

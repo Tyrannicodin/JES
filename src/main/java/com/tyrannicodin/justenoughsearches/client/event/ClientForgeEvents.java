@@ -11,17 +11,18 @@ import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = JustEnoughSearches.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class ClientForgeEvents {
+    public static Minecraft instance = Minecraft.getInstance();
+
     private ClientForgeEvents() {
 
     }
 
     @SubscribeEvent
     public static void clientTick(TickEvent.ClientTickEvent event) {
-        var player = Minecraft.getInstance().player;
         if (KeyInit.quicksearchKeyMapping.consumeClick()) {
-            Minecraft.getInstance().setScreen(new QuickSearch(""));
+            instance.setScreen(new QuickSearch(""));
         } else if (KeyInit.quicksearchShortcutKeyMapping.consumeClick()) {
-            Minecraft.getInstance().setScreen(new QuickSearch("="));
+            instance.setScreen(new QuickSearch("="));
         }
     }
 }
