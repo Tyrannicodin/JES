@@ -45,10 +45,12 @@ public class ItemListElement extends ListElement {
     @Override
     public boolean mouseClicked(double pMouseX, double pMouseY, int pButton) {
         if (active && visible) {
-            if (pButton == 0) {
-                SearchHandler.openItem(item, false);
-            } else if (pButton == 1) {
-                SearchHandler.openItem(item, true);
+            if (x < pMouseX && x+width > pMouseX && y < pMouseY && y+height > pMouseY) {
+                if (pButton == 0) {
+                    SearchHandler.openItem(item, false);
+                } else if (pButton == 1) {
+                    SearchHandler.openItem(item, true);
+                }
             }
         }
         return false;
