@@ -67,6 +67,14 @@ public class ListContainer {
         }
     }
 
+    public void mouseClicked(double pMouseX, double pMouseY, int pButton) {
+        ListItems.forEach(Item -> {
+            if (!Item.isEquation()) {
+                Item.mouseClicked(pMouseX, pMouseY, pButton);
+            }
+        });
+    }
+
     private void renderEquation(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick, double Result) {
         ListItems.get(0).Result = Result;
         ListItems.get(0).render(pPoseStack, pMouseX, pMouseY, pPartialTick);

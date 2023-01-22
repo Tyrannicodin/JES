@@ -1,6 +1,7 @@
 package com.tyrannicodin.justenoughsearches.client.gui.list;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.tyrannicodin.justenoughsearches.JustEnoughSearches;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.narration.NarratedElementType;
@@ -39,5 +40,17 @@ public class ItemListElement extends ListElement {
         Minecraft minecraft = Minecraft.getInstance();
         List<Component> toolText = item.getTooltipLines(minecraft.player, minecraft.options.advancedItemTooltips ? TooltipFlag.Default.ADVANCED : TooltipFlag.Default.NORMAL);
 
+    }
+
+    @Override
+    public boolean mouseClicked(double pMouseX, double pMouseY, int pButton) {
+        if (active && visible) {
+            if (pButton == 0) {
+                SearchHandler.openItem(item, false);
+            } else if (pButton == 1) {
+                SearchHandler.openItem(item, true);
+            }
+        }
+        return false;
     }
 }

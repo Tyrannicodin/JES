@@ -1,6 +1,7 @@
 package com.tyrannicodin.justenoughsearches.client.gui;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.tyrannicodin.justenoughsearches.JustEnoughSearches;
 import com.tyrannicodin.justenoughsearches.client.gui.list.ListContainer;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.Screen;
@@ -54,6 +55,12 @@ public class QuickSearch extends Screen {
     public void tick() {
         super.tick();
         tInput.tick();
+    }
+
+    @Override
+    public boolean mouseClicked(double pMouseX, double pMouseY, int pButton) {
+        listContainer.mouseClicked(pMouseX, pMouseY, pButton);
+        return super.mouseClicked(pMouseX, pMouseY, pButton);
     }
 
     @Override

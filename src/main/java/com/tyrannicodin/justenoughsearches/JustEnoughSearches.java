@@ -14,8 +14,8 @@ public class JustEnoughSearches
 {
     public static final String MOD_ID = "justenoughsearches";
 
-    // Directly reference a slf4j logger
-    private static final Logger LOGGER = LogUtils.getLogger();
+    // Logger for mod
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     public JustEnoughSearches()
     {
