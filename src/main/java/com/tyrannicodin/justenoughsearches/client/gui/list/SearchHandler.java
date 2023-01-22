@@ -4,7 +4,6 @@ import com.tyrannicodin.justenoughsearches.JustEnoughSearches;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.VanillaTypes;
-import mezz.jei.api.ingredients.IIngredientType;
 import mezz.jei.api.runtime.IIngredientFilter;
 import mezz.jei.api.runtime.IJeiRuntime;
 import net.minecraft.resources.ResourceLocation;
@@ -13,11 +12,11 @@ import net.minecraft.world.item.ItemStack;
 import java.util.List;
 
 @JeiPlugin
-public class searchHandler implements IModPlugin {
-    private static searchHandler instance;
+public class SearchHandler implements IModPlugin {
+    private static SearchHandler instance;
     private IIngredientFilter ingredientFilter;
 
-    public searchHandler() {
+    public SearchHandler() {
         instance = this;
     }
 
@@ -36,7 +35,7 @@ public class searchHandler implements IModPlugin {
         return instance.ingredientFilter.getFilteredIngredients(VanillaTypes.ITEM_STACK);
     }
 
-    public static searchHandler getInstance() {
+    public static SearchHandler getInstance() {
         return instance;
     }
 }

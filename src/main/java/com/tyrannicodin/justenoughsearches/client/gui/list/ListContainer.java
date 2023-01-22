@@ -10,26 +10,32 @@ import java.util.EmptyStackException;
 import java.util.List;
 
 public class ListContainer {
-    private ArrayList<ListElement> ListItems = new ArrayList<>();
-    private EquationListElement Equation;
-    private int x;
-    private int y;
-    private int width;
-    private int height;
+    private final ArrayList<ListElement> ListItems = new ArrayList<>();
+    private final EquationListElement equation;
+    private final int x;
+    private final int y;
+    private final int width;
+    private final int height;
+    private final int bottomPadding;
+    private final int elementPadding;
+
     private String prevInput = "";
 
-    public ListContainer(int pX, int pY, int pWidth, int pHeight) {
+    public ListContainer(int pX, int pY, int pWidth, int pHeight, int pBottomPadding, int pElementPadding) {
         x = pX;
         y = pY;
         width = pWidth;
         height = pHeight;
-        Equation = new EquationListElement(x, y, width, height);
+        bottomPadding = pBottomPadding;
+        elementPadding = pElementPadding;
+
+        equation = new EquationListElement(x, y, width, height);
     }
 
     public void render(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick, String Input) {
         if (Input == prevInput) {
             if (Input.startsWith("=")) {
-                renderEquation(pPoseStack, pMouseX, pMouseY, pPartialTick, Equation.Result);
+                renderEquation(pPoseStack, pMouseX, pMouseY, pPartialTick, equation.Result);
             } else {
                 renderItems(pPoseStack, pMouseX, pMouseY, pPartialTick);
             }
@@ -43,17 +49,16 @@ public class ListContainer {
                 } catch (IllegalArgumentException | EmptyStackException exception) {
                     Result = 0.0;
                 }
-                ListItems.add(Equation);
+                ListItems.add(equation);
                 renderEquation(pPoseStack, pMouseX, pMouseY, pPartialTick, Result);
                 //Minecraft.getInstance().player.displayClientMessage(new TextComponent(Result + ""), true);
             } else {
-                if (searchHandler.getInstance() != null) {
-                    List<ItemStack> results = searchHandler.searchItems(Input);
-                    int iY = y;
+                if (SearchHandler.getInstance() != null) {
+                    List<ItemStack> results = SearchHandler.searchItems(Input);
                     int maxHeight = Minecraft.getInstance().screen.height;
                     results.forEach(Item -> {
-                        if (y+height*(ListItems.size()+1) < maxHeight) {
-                            ListItems.add(new ItemListElement(x, y+((height+2)*ListItems.size()), width, height, Item));
+                        if (y+((height+elementPadding)*(ListItems.size()+1)+bottomPadding) < maxHeight) {
+                            ListItems.add(new ItemListElement(x, y+((height+elementPadding)*ListItems.size()), width, height, Item));
                         }
                     });
                     renderItems(pPoseStack, pMouseX, pMouseY, pPartialTick);

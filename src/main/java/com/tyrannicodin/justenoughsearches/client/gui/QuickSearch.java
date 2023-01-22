@@ -1,61 +1,66 @@
 package com.tyrannicodin.justenoughsearches.client.gui;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.logging.LogUtils;
 import com.tyrannicodin.justenoughsearches.client.gui.list.ListContainer;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
-import org.slf4j.Logger;
+import com.tyrannicodin.justenoughsearches.client.config.QuickSearchConfig;
 
 public class QuickSearch extends Screen {
     private String prefix = "";
 
-    private EditBox TInput;
-    private ListContainer ItemContainer;
+    private EditBox tInput;
+    private ListContainer listContainer;
 
-    private static final Logger LOGGER = LogUtils.getLogger();
+    private final int xPadding;
+    private final int yTopPadding;
+    private final int yBottomPadding;
+    private final int ElementPadding;
+    private final int width;
 
     public QuickSearch(String pPrefix) {
-        super(new TranslatableComponent("gui.justenoughsearches.quicksearch_title"));
+        super(new TranslatableComponent("gui.justenoughsearches.quicksearch.title"));
         prefix = pPrefix;
-    }
 
-    public void onRuntimeAvailable() {
-
-    }
-
-    public void setVisible() {
-        //Testing
+        xPadding = QuickSearchConfig.PADDINGX.get();
+        yTopPadding = QuickSearchConfig.PADDINGYT.get();
+        yBottomPadding = QuickSearchConfig.PADDINGYB.get();
+        width = QuickSearchConfig.WIDTH.get();
+        ElementPadding = QuickSearchConfig.PADDINGELEMENT.get();
     }
 
     @Override
     protected void init() {
         super.init();
 
-        TInput = new EditBox(this.font, 10, 10, 150, 16, new TextComponent(""));
-        TInput.setValue(prefix);
-        TInput.setVisible(true);
-        addRenderableWidget(TInput);
-        TInput.setFocus(true);
-        TInput.setEditable(true);
-        setFocused(TInput);
+        int editBoxY = yTopPadding+QuickSearchConfig.PADDINGTITLE.get()+font.lineHeight;
+        tInput = new EditBox(this.font, xPadding, editBoxY, width, 20, new TranslatableComponent("gui.justenoughsearches.quicksearch.editbox"));
+        if (tInput.getValue() == "") {
+            tInput.setValue(prefix);
+        }
+        tInput.setVisible(true);
+        addRenderableWidget(tInput);
+        if (QuickSearchConfig.AUTOFOCUS.get()) {
+            tInput.setFocus(true);
+            tInput.setEditable(true);
+            setFocused(tInput);
+        }
 
-        ItemContainer = new ListContainer(10, 28, 150, 20);
+        listContainer = new ListContainer(xPadding, editBoxY+20+ElementPadding, width, 20, yBottomPadding, ElementPadding);
     }
 
     @Override
     public void tick() {
         super.tick();
-        TInput.tick();
+        tInput.tick();
     }
 
     @Override
     public void render(PoseStack stack, int mouseX, int mouseY, float pPartialTick) {
-        drawString(stack, this.font, new TranslatableComponent("gui.justenoughsearches.quicksearch_title"), 10, 0, 0xFFFFFF);
+        drawString(stack, font, new TranslatableComponent("gui.justenoughsearches.quicksearch_title"), xPadding, yTopPadding, 0xFFFFFF);
 
-        ItemContainer.render(stack, mouseX, mouseY, pPartialTick, TInput.getValue());
+        listContainer.render(stack, mouseX, mouseY, pPartialTick, tInput.getValue());
 
         super.render(stack, mouseX, mouseY, pPartialTick);
     }

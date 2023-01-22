@@ -12,8 +12,17 @@ public class LangProvider extends LanguageProvider implements IConditionBuilder 
 
     @Override
     public void addTranslations() {
+        addKeybindings();
+        addGui();
+    }
+
+    public void addKeybindings() {
         add("key.justenoughsearches.open_quicksearch", "Open quick search");
         add("key.justenoughsearches.quicksearch_equation_shortcut", "Calculation shortcut");
-        add("gui.justenoughsearches.quicksearch_title", "Quick search");
+    }
+
+    public void addGui() {
+        add("gui.justenoughsearches.quicksearch.title", "Quick search");
+        add("gui.justenoughsearches.quicksearch.editbox", "Quick search entry box");
     }
 }
