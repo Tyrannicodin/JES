@@ -3,6 +3,7 @@ package com.tyrannicodin.justenoughsearches.client.gui;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.tyrannicodin.justenoughsearches.JustEnoughSearches;
 import com.tyrannicodin.justenoughsearches.client.gui.list.ListContainer;
+import com.tyrannicodin.justenoughsearches.client.gui.list.SearchHandler;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -37,8 +38,10 @@ public class QuickSearch extends Screen {
 
         int editBoxY = yTopPadding+QuickSearchConfig.PADDINGTITLE.get()+font.lineHeight;
         tInput = new EditBox(this.font, xPadding, editBoxY, width, 20, new TranslatableComponent("gui.justenoughsearches.quicksearch.editbox"));
-        if (tInput.getValue() == "") {
+        if (prefix == "=") {
             tInput.setValue(prefix);
+        } else {
+            tInput.setValue(SearchHandler.getQuery());
         }
         tInput.setVisible(true);
         addRenderableWidget(tInput);

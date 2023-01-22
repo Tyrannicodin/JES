@@ -49,4 +49,8 @@ public class SearchHandler implements IModPlugin {
     public static void openItem(ItemStack item, boolean isInput) {
         instance.recipesGui.show(instance.focusFactory.createFocus(isInput ? RecipeIngredientRole.INPUT : RecipeIngredientRole.OUTPUT, VanillaTypes.ITEM_STACK, item));
     }
+
+    public static String getQuery() {
+        return instance.ingredientFilter.getFilterText();
+    }
 }
